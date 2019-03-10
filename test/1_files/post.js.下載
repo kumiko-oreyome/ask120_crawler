@@ -1,0 +1,910 @@
+/*==========YWBD广告 start==========*/
+function noClick(){
+    $(".lf_ad_close").click(function(event){
+            stopBubble(event);
+    });
+    $(".lf_ad_close_a").click(function(event){
+            stopBubble(event);
+    });
+    $("#lf_ad_close_n").click(function(event){
+            stopBubble(event);
+    });
+    $(".fix_left_b span").click(function(event){
+            stopBubble(event);
+    });
+}
+
+function noPiao(){
+    noClick();
+}
+function setTopImgStyle(){
+	$("#top_img_bd").height(90);
+}
+function stopBubble(e) {
+    if (e && e.stopPropagation) {//非IE
+            e.stopPropagation();
+    }
+    else {//IE
+            window.event.cancelBubble = true;
+    }
+}
+
+function hiddenlianmeng(){
+    $("#hiddenlianmeng").remove();
+}
+function hiddenYaopin(){
+    $(".yaopin_gg").remove();
+}
+
+function hiddenC(){
+	$('#def-sou').hide();
+}
+function adposhow(){
+    $('#ad-po').show();
+}
+
+var objAdRight = {};
+objAdRight.CONST_A = 0;
+function hidden_post_right()
+{
+	objAdRight.CONST_A = objAdRight.CONST_A + 1;
+	var adPostRightHtml = $('#post_right_ad').html();
+	if((objAdRight.CONST_A == 4) && (adPostRightHtml !='') )
+	{
+		$('.post_right').hide();
+		$('#post_right_ad').show();
+	}
+}
+
+$(document).ready(function(){
+	
+	YWBD.YWBD_SET_PARAMS('Id',1766);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#post_right_ad'));
+
+	YWBD.YWBD_SET_PARAMS('Id',1636);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#ad-baoban'),'',"hidden_post_right");
+
+	YWBD.YWBD_SET_PARAMS('Id',1625);
+	YWBD.YWBD_SET_KEYWORD_PARAMS();
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#ad-right-tag'),'',"hidden_post_right");
+
+    YWBD.YWBD_SET_PARAMS('Id',1642);
+    YWBD.YWBD_SET_AREA_PARAMS();
+    YWBD.YWBD_SET_KEYWORD_PARAMS();
+    YWBD.YWBD_SET_LOG();
+    YWBD.YWBD_AD_AJAX($('#gg-yaopin'),"hiddenYaopin","hidden_post_right");
+
+	YWBD.YWBD_SET_PARAMS('Id',1635);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#top_img_bd'),"setTopImgStyle");
+
+	YWBD.YWBD_SET_PARAMS('Id',1634);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#gg-pio'),'noPiao');
+
+	YWBD.YWBD_SET_PARAMS('Id',1658);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#g-tu'));
+
+	YWBD.YWBD_SET_PARAMS('Id',1629);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_KEYWORD_PARAMS();
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#ad-zs-1'));
+
+	YWBD.YWBD_SET_PARAMS('Id',1630);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_KEYWORD_PARAMS();
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#ad-zs-2'));
+
+    YWBD.YWBD_SET_PARAMS('Id',1628);
+    YWBD.YWBD_SET_KEYWORD_PARAMS();
+    YWBD.YWBD_SET_AREA_PARAMS();
+    YWBD.YWBD_SET_LOG();
+    YWBD.YWBD_AD_AJAX($('#ad-po'),'adposhow');
+
+	YWBD.YWBD_SET_PARAMS('Id',1631);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#gg-re'),'hiddenC');
+
+	YWBD.YWBD_SET_PARAMS('Id',1652);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_KEYWORD_PARAMS();
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#ad_tongji'));
+	
+	YWBD.YWBD_SET_PARAMS('Id',1760);
+	YWBD.YWBD_SET_CLASS_PARAMS(_CLASSID_);
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#doc_video'),'',"hidden_post_right");
+
+	YWBD.YWBD_SET_PARAMS('Id',1700);
+	YWBD.YWBD_SET_KEYWORD_PARAMS();
+	YWBD.YWBD_SET_AREA_PARAMS();
+	YWBD.YWBD_SET_LOG();
+	YWBD.YWBD_AD_AJAX($('#list_top_ad'));
+});
+
+/*==========YWBD广告 end==========*/
+//我要回答
+(function(){
+	$(".b_answerbtn").click(function(){
+		$(".b_ansarpbtn").hide();
+		$(".b_ansareabox").slideToggle("fast");
+	});
+	$(".b_areaup_btn").click(function(){
+		$(this).parent().parent().slideUp("fast",function(){$(".b_ansarpbtn").show();});
+	});
+	$("#b_ans_area").focus(function(){
+		$(this).addClass("s_focus");
+		if($(this).val()==this.defaultValue){
+			$(this).val('');
+		}
+	}).blur(function(){
+		$(this).removeClass("s_focus");
+		if($(this).val()=='')
+		$(this).val(this.defaultValue);
+	});
+	$(".b_numtxt").click(function(){
+		var neirong=$("#b_ans_area").val();
+		if(neirong.length<5 || neirong=="请对提问者病情认真做出合理化分析,并针对提问者想得到的帮助，提供合理化指导意见。"){
+			alert('提问内容少于5字');
+			$("#b_ans_area").focus();
+			return false;
+		}
+	});
+})();
+$(function(){
+	$('.b_rliul li').hover(function(){
+		$(this).addClass('b_rlihover').siblings().removeClass('b_rlihover');
+	});
+});
+
+//列表切换
+(function simpleClickTab(optlist,showlist){
+	var list1 = $(optlist);
+	var list2 = $(showlist);
+	list1.click(function(){
+		var index = list1.index($(this));
+		$(this).addClass('b_tablistcur').siblings().removeClass('b_tablistcur');
+		list2.eq(index).show().siblings().hide();
+	})
+})('#b_tabboxul li','#b_tabbigbox div');
+
+//加入收藏
+function AddFavorite()
+{
+    var sURL1   =  window.location;
+    var sTitle = document.title;
+    var sURL = encodeURI(sURL1);
+    try{
+      window.external.addFavorite(sURL, sTitle);
+    }
+    catch(e)
+    {
+        try{
+            window.sidebar.addPanel(sTitle, sURL,"");
+        }catch (e) {
+			var scBox = Q('#d_favorites')[0];
+			var scClose = Q('#d_favorites .fav_close')[0];
+			var fav_conta = Q('#d_favorites .fav_cont a')[0];
+			var scfn = null;
+			scfn = new Dmet.alertBox(scBox,{top:'middle',left:'center',lock:true})
+			$(scClose).click(function(){
+				scfn.closeMask(scBox);
+			});$(fav_conta).click(function(){
+				scfn.closeMask(scBox);
+			});
+        }
+    }
+}
+
+/*绑定事件*/
+function addEvent(obj,type,fn){
+	if(!obj){return null;}
+	if(obj.addEventListener){
+		obj.addEventListener(type,function (ev){
+			var rtn=fn.call(obj,ev);
+			if(rtn==false)
+			{
+				ev.cancelBubble=true;
+				ev.preventDefault();
+			}
+		},false);
+	}else{
+		obj.attachEvent('on'+type,function (){
+			var rtn=fn.call(obj,event);
+
+			if(rtn==false)
+			{
+				event.cancelBubble=true;
+				return false;
+			}
+		})
+	}
+};
+
+function Q(arg){
+	this.aElements = [];
+	switch (typeof arg){
+		case 'string':
+			switch(arg.charAt(0)){
+				case '#':
+					if(/\s/.test(arg)){
+						var aArg = arg.split(' ');
+						this.aElements = getEle(aArg[0],aArg[1]);
+					}else{
+						this.aElements.push(document.getElementById(arg.substring(1)));
+					}
+					break;
+			}
+			break;
+		case 'function':
+			addEvent(window,'load',arg);
+			break;
+	}
+
+	return this.aElements;
+}
+
+function getEle(f,s){
+	var result = [];
+	var elements = null;
+	if(s.charAt(0) == '.'){
+		if(typeof f === 'string'){
+			if(!document.getElementById(f.substring(1))){
+				return false;
+			}
+			elements = document.getElementById(f.substring(1)).getElementsByTagName('*');
+		}else if(typeof f === 'object'){
+			elements = f.getElementsByTagName('*');
+		}
+		for(var i=0;i<elements.length;i++){
+			if(/\s/.test(elements[i].className)){
+				var names = elements[i].className.split(' ');
+				if(strComper(s.substring(1),names)){
+					result.push(elements[i]);
+				}
+			}else{
+				if(elements[i].className == s.substring(1)){
+					result.push(elements[i]);
+				}
+			}
+		}
+	}else{
+		if(typeof f === 'string'){
+			result = document.getElementById(f.substring(1)).getElementsByTagName(s);
+		}else if(typeof f === 'object'){
+			result = f.getElementsByTagName(s);
+		}
+	}
+	return result;
+}
+
+function strComper(a,b){
+	for(var i=0;i<b.length;i++){
+		if(a == b[i]){
+			return true;
+			break
+		}
+	}
+}
+
+//悬赏操作效果
+function selectPayType(){
+	var oBox = $('#d_xsalert');
+	var type = 0;
+	var iRadio = $('input:radio',oBox);
+	var passCon = $('.d_pay_word',oBox);
+	passCon.hide();
+	iRadio.click(function(){
+		if(this.checked){
+			type = parseInt(this.value);
+		}
+		if(type){
+			passCon.show();
+		}else{
+			passCon.hide();
+		}
+	});
+}
+
+//弹出层
+var askAlert = {
+	/*补充提问*/
+	bc:function(){
+		var bcBox = Q('#d_bcalert')[0];
+		var bcClose = Q('#d_bcalert .d_close')[0];
+		var bcfn = null;
+		var okBtn = $('#bctw_btn');
+		$('#d_bcbtn').bind({
+			click:alertBc
+		});
+
+		function alertBc(){
+			bcfn = new Dmet.alertBox(bcBox,{top:'middle',left:'center',lock:true})
+		};
+
+		$(bcClose).click(function(){
+			bcfn.closeMask(bcBox);//关闭弹出
+			bcfn = null;
+		});
+		okBtn.click(function(){
+			bcfn.closeMask(bcBox);//关闭弹出
+			bcfn = null;
+			bcCheck();
+		})
+	},
+	/*上传*/
+	up:function(){
+		var upBox = Q('#d_upalert')[0];
+		var upClose = Q('#d_upalert .d_close')[0];
+		var upfn = null;
+
+		$('#d_upbtn').bind({
+			click:alertUp
+		});
+
+		function alertUp(){
+			upfn = new Dmet.alertBox(upBox,{top:'middle',left:'center',lock:true});
+		};
+
+		$(upClose).click(function(){
+			upfn.closeMask(upBox);//关闭弹出
+			upfn = null;
+		});
+	},
+	/*追加悬赏*/
+	xs:function(){
+
+		var xsBox = Q('#d_xsalert')[0];
+		//var xsBox = $('#d_xsalert');
+		var xsClose = Q('#d_xsalert .d_close')[0];
+		//var xsClose = $('#d_xsalert .d_close');
+		var xsfn = null;
+
+		$('#d_xsbtn').bind({
+			click:alertXs
+		});
+
+
+		function alertXs(){
+			xsfn = new Dmet.alertBox(xsBox,{top:'middle',left:'center',lock:true});
+		};
+
+		$(xsClose).click(function(){
+			xsfn.closeMask(xsBox);//关闭弹出
+			xsfn = null;
+		});
+		selectPayType();
+		var okBtn = $("#wtcz_btn");
+		okBtn.click(function(){
+
+			zjCheck();
+		});
+	},
+	/*匿名*/
+	nm:function(){
+		var nmBox = Q('#d_nmalert')[0];
+		var nmClose = Q('#d_nmalert .d_close')[0];
+		var nmfn = null;
+		var okBtn = $("#niming_btn");
+		$('#d_nmbtn').bind({
+			click:alertNm
+		});
+
+		function alertNm(){
+			nmfn = new Dmet.alertBox(nmBox,{top:'middle',left:'center',lock:true})
+		};
+
+		$(nmClose).click(function(){
+			nmfn.closeMask(nmBox);//关闭弹出
+			nmfn = null;
+		});
+		okBtn.click(function(){
+			nmfn.closeMask(nmBox);//关闭弹出
+			nmfn = null;
+			$("#nimingForm").submit();
+		});
+	},
+	/*积分不够*/
+	jf:function(){
+		var jfBox = Q('#d_jfalert')[0];
+		var jfClose = Q('#d_jfalert .d_close')[0];
+		var jffn = null;
+
+		jffn = new Dmet.alertBox(jfBox,{top:'middle',left:'center',lock:true})
+
+		$(jfClose).click(function(){
+			jffn.closeMask(jfBox);//关闭弹出
+			jffn = null;
+		});
+	},
+//等待
+	dd:function(){
+		var jfBox = Q('#d_dengdai')[0];
+		var jffn = null;
+		jffn = new Dmet.alertBox(jfBox,{top:'middle',left:'center',lock:true})
+	}
+}
+
+$(document).ready(function(){
+//上传
+	$("#upload_btn").click(function(){
+		var file = $("#FileName").val();
+		if(!file){
+			alert('请选择要上传的文件！');
+			return false;
+		}
+		$('#contentText').val("");
+		$("#uploadForm").submit();
+		$('#d_upalert').hide();
+		$('#wjscszdzzc').hide().remove();
+		askAlert.dd();
+		setTimeout(function(){
+			addr = $('#contentText').val();
+			if(addr){
+				$("#uploadPicForm").submit();
+				$('#contentText').val("");
+				dengdai_close();
+				return false;
+			}else{
+				alert('上传失败，请稍后重试');
+			}
+			dengdai_close();
+		},5000);
+
+	});
+});
+
+//追问
+function zw_btn(tid,pid,otype,posttype,flvname){
+	if(otype == 1){
+		$('#d_zwalert .d_title h3').html('回复患者的追问');
+	}
+	var zwBox = Q('#d_zwalert')[0];
+	var zwClose = Q('#d_zwalert .d_close')[0];
+	var zwfn = null;
+	zwfn = new Dmet.alertBox(zwBox,{top:'middle',left:'center',lock:true});
+	$(zwClose).click(function(){
+		zwfn.closeMask(zwBox);//关闭弹出
+		//zwfn = null;
+	});
+
+	$("#zwopost").val(posttype);
+	$("#zwoflv").val(flvname);
+	$("#zw_btn").click(function(){
+		var content = $("#zw_content").val();
+		if(!content){
+			alert('追问内容不能为空');return false;
+		}
+		if(!tid || !pid){
+			alert('禁止外部提交');return false;
+		}
+		$("#zwtid").val(tid);
+		$("#zwpid").val(pid);
+		$("#zwoType").val(otype);
+		$("#zwForm").submit();
+		zwfn.closeMask(zwBox);
+		//closeAlert(zwBox);
+	})
+
+}
+
+/*==========采纳 start==========*/
+function caina_btn(pid,type,username){
+	var jkba = '';
+	if(type==1){
+		var ca = '#d_jkbcnalert';
+	}else{
+		var ca = '#d_jfcnalert';
+
+	}
+	var cnBox = Q(ca)[0];
+	var cnClose = Q(ca+' .d_close')[0];
+	var cnfn = null;
+	$('.bcainar').html(username);
+	cnfn = new Dmet.alertBox(cnBox,{top:'middle',left:'center',lock:true});
+
+	$(cnClose).click(function(){
+		cnfn.closeMask(cnBox);//关闭弹出
+	});
+	if(!pid){
+			alert('禁止外部提交');return false;
+	}
+
+	$("#jkBcainaPid").val(pid);
+	$("#jFcainaPid").val(pid);
+	$("#jkbcn_btn").click(function(){
+		$(".cnda2").each(function(){
+			var authorid = $(this).attr('name');
+			jkba = jkba+authorid+"="+$(this).val()+",";
+		});
+		$("#cainaArgs").val(jkba);
+		var acti = $(".cn_action:checked");
+
+		if(!acti.length){
+			alert("您还没有选择采纳类型，请您选择采纳类型，谢谢！");
+			return false;
+		}
+		cnfn.closeMask(cnBox);
+		$("#JkbcainaForm").submit();
+
+	})
+
+	$("#jfcn_btn").click(function(){
+		cnfn.closeMask(cnBox);
+		$("#JfcainaForm").submit();
+	})
+}
+/*==========采纳 end==========*/
+
+//关闭等待弹窗
+function dengdai_close(){
+	$("#d_dengdai").hide();
+	$("#wjscszdzzc").hide().remove();
+};
+//jjiju();
+askAlert.bc();//补充提问
+askAlert.xs();//悬赏
+askAlert.nm();//匿名
+askAlert.up();//上传
+//cnPay();
+//getShowArea(0);
+//xsSelect(0);//追加悬赏
+
+/*met*/
+var Dmet = {};
+var GLOBAlIE6= /msie 6/ig.test(window.navigator.userAgent) && !/msie [1-57-9]/ig.test(window.navigator.userAgent);
+Dmet.alertBox = function(obj,pos){
+	if(!obj){
+		return null;
+	};
+	this.obj = obj;
+	this.left = (typeof pos.left == 'undefined')?'':pos.left;
+	this.right = (typeof pos.right == 'undefined')?'':pos.right;
+	this.top = (typeof pos.top == 'undefined')?'':pos.top;
+	this.bottom = (typeof pos.bottom == 'undefined')?'':pos.bottom;
+	this.animit = pos.animit||false;
+	this.lock = pos.lock||false;
+	this.setBody();
+	this.creatMask();
+	obj.style.display = 'block';
+	this.setPos(obj);
+	var that = this;
+	this.bindResize();
+};
+
+
+Dmet.alertBox.prototype={
+	setBody:function(){
+		if((GLOBAlIE6) && (css(document.body,'backgroundAttachment') !== "fixed") && (css(document.body,'backgroundImage') === "none")){
+			document.body.style.backgroundRepeat = "no-repeat";
+			document.body.style.backgroundImage = "url(about:blank)";
+			document.body.style.backgroundAttachment = "fixed";
+		}
+	},
+	creatMask:function(){
+		if(this.lock){
+			this.mask = document.createElement("div");
+			this.mask.id="wjscszdzzc";
+			var frame = document.createElement("iframe");
+			frame.style.filter = 'alpha(opacity=0)';
+			frame.style.opacity = 0;
+			frame.style.width='100%';
+			frame.style.height = '100%';
+			if(this.animit){
+				this.mask.style.cssText = 'width:100%;height:100%;background:black;filter:alpha(opacity=10);opacity:0.1;position:fixed;top:0;left:0;_position:absolute;_top:expression((document).documentElement.scrollTop);_height:expression((document).documentElement.clientHeight);z-index:500';
+			}else{
+				this.mask.style.cssText = 'width:100%;height:100%;background:black;filter:alpha(opacity=50);opacity:0.5;position:fixed;top:0;left:0;_position:absolute;_top:expression((document).documentElement.scrollTop);_height:expression((document).documentElement.clientHeight);z-index:500';
+			}
+			//this.mask.appendChild(frame);
+			document.body.appendChild(this.mask);
+			if(this.animit){
+				startMove(this.mask,{opacity:50});
+			}
+			document.onkeypress = function(ev){
+				var oEvent = ev || event;
+				if(oEvent.keyCode  == 13){
+					return false;
+				}
+			}
+		}
+	},
+	setPos:function(obj){
+		var dom = '(document.documentElement || document.body)';
+		if(obj){
+			if(this.top == 'middle'){
+				if(GLOBAlIE6 && obj.style.setExpression){
+					obj.style.setExpression('top', dom + '.scrollTop+'+(eval(dom).clientHeight-obj.offsetHeight)/2);
+				}else{
+					obj.style.marginTop = 0+'px';
+					obj.style.top = '50%';
+					obj.style.marginTop = -(obj.offsetHeight)/2+'px';
+				}
+			}else{
+				if(this.top!==''){
+					if(GLOBAlIE6 && obj.style.setExpression){
+					obj.style.setExpression('top', dom + '.scrollTop+'+this.top);
+					}else{
+						obj.style.top = this.top+'px';
+					}
+				}
+			}
+			if(this.left == 'center'){
+				obj.style.left = '50%';
+				obj.style.marginLeft = -(obj.offsetWidth)/2+'px';
+			}else{
+				if(this.left!==''){//自设距离左
+					obj.style.marginLeft = 0+'px';
+					obj.style.left = this.left+'px';
+				}
+			}
+			if(this.right !==''){
+				obj.style.marginLeft = 0+'px';
+				obj.style.left = 'auto';
+				obj.style.right = this.right+'px';
+			}
+			if(this.bottom !==''){
+				obj.style.top = 'auto';
+
+				if(GLOBAlIE6 && obj.style.setExpression){
+					obj.style.setExpression('top', dom + '.scrollTop+'+(eval(dom).clientHeight-obj.offsetHeight-this.bottom));
+				}else{
+					obj.style.bottom = this.bottom+'px';
+				}
+			}
+		}
+	},
+	closeMask:function(obj){
+		var that = this;
+		var obj = this.obj || obj;
+		if(!obj){return null;}
+		if(this.mask){
+			if(this.animit){
+				startMove(this.mask,{opacity:0},function(){
+					document.body.removeChild(that.mask);
+					that.mask = null;
+				})
+			}else{
+				document.body.removeChild(this.mask);
+				this.mask = null;
+			}
+			document.onkeypress = function(){
+				return true;
+			}
+		}
+		obj.style.display = 'none';
+		if(GLOBAlIE6 && obj.style.setExpression){
+			obj.style.removeExpression('top');
+			obj.style.removeExpression('left');
+		}
+	},
+	bindResize:function(){
+		var that = this;
+		var t = null;
+		var b = true;
+		var obj = this.obj;
+		addEvent(window,'resize',function(){
+			if(b){
+				that.setPos(obj);
+				if(t){
+					clearTimeout(t);
+					t = null;
+				}
+				b = false;
+				t = setTimeout(function(){
+					that.setPos(obj);
+					b = true;
+				},100)
+
+			}
+		})
+	},
+	bindScroll:function(){
+		if(!this.obj){
+			return null;
+		};
+		var that = this;
+		var t = null;
+		var b = true;
+		addEvent(window,'scroll',function(){
+			if(b){
+				that.setPos(obj);
+				if(t){
+					clearTimeout(t);
+					t = null;
+				}
+				b = false;
+				t = setTimeout(function(){
+					that.setPos(obj);
+					b = true;
+				},200)
+			}
+		})
+	}
+};
+
+/* 追加悬赏 */
+function zjCheck(){
+	var box = $('#zjxsForm');
+	var item = $("input[name='wtcz_box']:checked",box).val();
+	if(item == 'zjxs'){
+		var type = $("input[name='fs']:checked",box).val();
+		var offertype = $("#offertype").val();
+		if(offertype == 1){
+			var offer = $("#add_jkboffer").val();
+			$("#add_jkboffer").change(function(){
+				var offer = $(this).val();
+			});
+		}else{
+			if(type == 0){
+				var offer = $("#add_jfoffer").val();
+				$("#add_jfoffer").change(function(){
+					var offer = $(this).val();
+				});
+			}else{
+				var offer = $("#add_jkboffer").val();
+				$("#add_jkboffer").change(function(){
+					var offer = $(this).val();
+				});
+			}
+		}
+		$("#ZJaddoffertype").val(type);
+		$("#ZJofer").val(offer);
+		$("#zjxsForm").submit();
+	}else if(item == 'wmyhd'){
+		$("#zjxsForm").attr("action",'http://a.120ask.com/topic/limited_satis_ans');
+		$("#zjxsForm").submit();
+		//window.location.reload();
+	}else{
+		alert('没有这个操作');
+	}
+}
+
+/*修改回答
+function correctAns()
+{
+	var regK = /\t+|\s+|\r+|\n+/g;
+	var changeBox = $('.d_correctbox');
+	changeBox.data('forobj',null);
+	$('.d_correctanswer_new').live('click',function(){
+		var Pdiv = $(this).parent().parent();
+		var tip = $('.d_tips',Pdiv).eq(0);
+		var pidinp = $('.d_pidinp',Pdiv).eq(0);
+		var area = $('.d_changearea',Pdiv).eq(0);
+		var selectForm = $('.d_correctbox',Pdiv).eq(0);
+
+		area.bind({
+			paste:function(){
+				tip.html('不能进行粘贴操作！');
+				return false;
+			},
+			copy:function(){
+				tip.html('不能进行复制操作！');
+				return false;
+			},
+			cut:function(){
+				tip.html('不能进行剪切操作！');
+				return false;
+			},
+			blur:function(){
+				tip.html('');
+			}
+		});
+		if(changeBox.data('forobj') != this){
+			changeBox.data('forobj',this);
+			if(!this.par){
+				this.par = $(this).parent().prevAll('.b_anscont_cont');
+				this.txt = $('.crazy_new',this.par).text();
+				this.txt = this.txt.replace(regK,'');
+				this.txt = this.txt.replace(/病情分析(：|:)/g,'\n病情分析：\n');
+				this.txt = this.txt.replace(/指导意见(：|:)/g,'\n指导意见：\n');
+				this.txt = this.txt.replace(/医生询问(：|:)/g,'\n医生询问：\n');
+				this.txt = this.txt.replace(/预后护理(：|:)/g,'\n预后护理：\n');
+				this.txt = this.txt.replace(/生活护理(：|:)/g,'\n生活护理：\n');
+				this.txt = this.txt.replace(/意见建议(：|:)/g,'\n意见建议：\n');
+				this.txt = this.txt.replace(/\(本回答来自：(.*?)\)/g,'');
+				this.txt = this.txt.replace(/^\n+|\n+$/g,'');
+			}
+			pidinp.val($(this).attr('pid'));
+			tip.html('');
+			area.val(this.txt);
+			selectForm.show();
+		}else{
+			selectForm.toggle();
+		}
+	});
+}
+*/
+
+/*给药品添加url*/
+function addYaopinUrl(yp){
+    var reply = $(".crazy_new");
+    var replyH= new Array();
+    for(var k=0;k<reply.length;k++) {
+        replyH[k] = $(reply.get(k)).html();
+    }
+    for(var i=0;yp[i];i++) {
+    	var reg=new RegExp(yp[i].name);
+		var text =  "<a style='color:#238600;font-weight:bold' onclick=\"_hmt.push(['_trackEvent', 'tui_yaopin', 'ask_question', 'tag_drug']);\" href='http://yp.120ask.com/detail/"+yp[i].url+".html'>"+yp[i].name+"</a>";
+        for(var j=0;j<reply.length;j++) {
+			replyH[j] = replyH[j].replace(reg,text);
+        }
+    }
+    for(var l=0;l<reply.length;l++) {
+        $(reply[l]).html(replyH[l])
+    }
+}
+
+function addYaopinUrlNew(yp)
+{
+	for(var o in yp)
+	{
+		var rpy = $('#reply'+o).html();
+		if(rpy != null)
+		{
+			for (var i=0;yp[o][i];i++)
+			{
+				var reg=new RegExp(yp[o][i].name,'i');
+				var text =  "<a style='color:#238600;font-weight:bold' onclick=\"_hmt.push(['_trackEvent', 'tui_yaopin', 'ask_question', 'tag_drug']);\" href='http://yp.120ask.com/detail/"+yp[o][i].url+".html'>"+yp[o][i].name+"</a>";
+				rpy = rpy.replace(reg,text);
+			}
+			$('#reply'+o).html(rpy);
+		}
+	}
+}
+
+/*YWBDAD-1631-1652*/
+function showAskinpdiv(){
+	$("#p_askinpdiv").css({"margin":"10px 0","text-align":"center","background":"#fff","padding":"15px 0"});
+	$(".dcy_tonglan_pic").css({"border":"1px #ccc solid","width":"640px","height":"62px","padding":"2px"});
+}
+
+function showUrl(webHost,i){
+	window.open("http://"+webHost+".120ask.com/"+i);
+}
+function showTopLink(m,n)
+{
+	window.open("http://"+m+".120ask.com/"+n);
+}
+function showLink(type,i){
+    switch(type)
+    {
+        case "ad" :
+            window.open(i);
+            break;
+        default :
+    }
+}
+/*$(function(){
+	correctAns();
+});*/
+//baidu count
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?7c2c4ab8a1436c0f67383fe9417819b7";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+})();

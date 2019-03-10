@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* 话费 */
+.active{display:block;width:127px;height:242px;position:fixed;left:50%;margin-left:-617px;top:50%;margin-top:-200px;}
+.activeBox{position:relative;}
+.activeBox i{display:block;width:18px;height:18px;background:url(//cdn.120askimages.com/ask/tag/huafei/close.png) no-repeat 0 0;position:absolute;right:0px;top:0px;z-index:999;cursor:pointer;display:none;}
+.activeBox .hover{background-position:-30px 0px;}
+.activeBox a {position:relative;display:block;height:242px;}
+.activeBox a span{display:block;}
+.active1{display:block;width:124px;height:88px;background:url(//cdn.120askimages.com/ask/tag/huafei/active1.png) no-repeat 0 0;position:absolute;top:-240px;}
+.active2{width:76px;height:57px;margin-left:42px;margin-top:-30px;background:url(//cdn.120askimages.com/ask/tag/huafei/active2.png) no-repeat 0 0;z-index:10;position:absolute;top:110px;opacity:0;filter:alpha(opacity=0);transition:transform 0.6s ease-in;-webkit-transition:-webkit-transform 0.6s ease-in;-moz-transition:-moz-transform 0.6s ease-in;}
+.activing{transform:rotate(30deg);-webkit-transform:rotate(30deg);-moz-transform:rotate(30deg);}
+.active3{width:0px;height:0px;background:url(//cdn.120askimages.com/ask/tag/huafei/active3.png) no-repeat 0 0;z-index:9;margin-left:13px;position:absolute;top:135px;overflow:hidden;}
+/* tag漂浮广告 */
+.Consultation{z-index:10;width:191px;left:0; bottom:30px;position:fixed; _position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight / 2 - this.offsetHeight / 2)); }
+.Consultation {width:190px;display:none;overflow:hidden;}
+.Consultation .Close{ width:190px; height:32px; background:url(//cdn.120askimages.com/ask/css/img/bga_04.gif) no-repeat;}
+.Consultation .Close_one{ margin-top:8px; padding-left:42px;}
+.Consultation .Close_two{ margin-top:5px; margin-right:9px;_margin-right:5px;}
+.Consultation .Consul{width:187px; border:1px solid #e0e0e0;border-top:none; padding:9px 0 0px 5px;background-color: #f8f8f8;overflow:hidden;}
+.Consultation .Consul_one{width:100%; border-bottom:1px dashed #e5e5e5;margin-top:8px;height:76px;}
+.Consultation .Consul_one:last-of-type{border:none;}
+.Consultation .Consul_pic{width:56px;}
+.Consultation .Consul_two{width:110px;}
+.Consultation .Consul_two p{ line-height:18px; height:18px; overflow:hidden;}
+.Consultation .Consul_three{float:left;widt h:100%; margin-top:10px;padding-bottom:8px;}
+.Consultation .gr{margin-bottom:8px;}
+.Consultation .hu a{color:#999999;}
+.Consultation .he a{color:#535353;}
+.Consultation .f144{ font-size:14px;}
+.Consultation .f122{ font-size:12px;}
+.Consultation .fll{ float:left;}
+.Consultation .frr{ float:right;}
+.Consultation .wan{ width:110px;clear:both;overflow:hidden;}
+.Consultation .mrr10{ margin-right:6px;}
+.Consultation .pt22{ padding-top:2px;}
+.Consultation .pbb10{ padding-bottom:10px;}
+.Consultation .mbb5{ margin-bottom:5px;}
+.Consultation .mrr5{ margin-right:5px;}
+.Consultation .zhuzhi a{ color:#000;}
+.Consultation .bs{ color:#FFF;}

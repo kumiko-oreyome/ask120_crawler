@@ -1,0 +1,132 @@
+var Dmet = {};
+Dmet.alertBox = function(obj,pos){
+	this.left = (typeof pos.left == 'undefined')?'':pos.left;
+	this.right = (typeof pos.right == 'undefined')?'':pos.right;
+	this.top = (typeof pos.top == 'undefined')?'':pos.top;
+	this.bottom = (typeof pos.bottom == 'undefined')?'':pos.bottom;
+	this.animit = pos.animit||false;
+	this.lock = pos.lock||false;
+	this.setBody();
+	this.creatMask();
+	obj.style.display = 'block';
+	this.setPos(obj);
+	var that = this;
+	addEvent(window,'resize',function(){
+		that.setPos(obj)
+	})
+}
+
+
+Dmet.alertBox.prototype={
+	setBody:function(){
+		if((window.ActiveXObject && !window.XMLHttpRequest) && (css(document.body,'backgroundAttachment') !== "fixed") && (css(document.body,'backgroundImage') === "none")){
+			document.body.style.backgroundRepeat = "no-repeat";
+			document.body.style.backgroundImage = "url(about:blank)";
+			document.body.style.backgroundAttachment = "fixed";
+		}
+	},
+	creatMask:function(){
+		/*遮罩*/
+		if(this.lock){
+			this.mask = document.createElement("div");
+			var frame = document.createElement("iframe")
+			frame.style.filter = 'alpha(opacity=0)';
+			frame.style.opacity = 0;
+			frame.style.width='100%';
+			frame.style.height = '100%';
+			if(this.animit){
+				this.mask.style.cssText = 'width:100%;height:100%;background:black;filter:alpha(opacity=10);opacity:0.1;position:fixed;top:0;left:0;_position:absolute;_top:expression((document).documentElement.scrollTop);_height:expression((document).documentElement.clientHeight);z-index:99';
+			}else{
+				this.mask.style.cssText = 'width:100%;height:100%;background:black;filter:alpha(opacity=50);opacity:0.5;position:fixed;top:0;left:0;_position:absolute;_top:expression((document).documentElement.scrollTop);_height:expression((document).documentElement.clientHeight);z-index:99';
+			}
+			this.mask.appendChild(frame);
+			document.body.appendChild(this.mask);
+			/*遮罩*/
+			if(this.animit){
+				startMove(this.mask,{opacity:50})
+			}
+			document.onkeypress = function(ev){
+				var oEvent = ev || event;
+				if(oEvent.keyCode  == 13){
+					return false;
+				}
+			}
+		}
+	},
+	setPos:function(obj){	
+		var dom = '(document.documentElement || document.body)';
+		if(obj){
+			/*垂直居中*/
+			if(this.top == 'middle'){
+				if(window.ActiveXObject && !window.XMLHttpRequest){
+					obj.style.setExpression('top', dom + '.scrollTop+'+(eval(dom).clientHeight-obj.offsetHeight)/2);
+				}else{
+					obj.style.marginTop = 0+'px';
+					obj.style.top = '50%';
+					obj.style.marginTop = -(obj.offsetHeight)/2+'px'
+				}
+			}else{//自设距离高
+				if(this.top!==''){
+					if(window.ActiveXObject && !window.XMLHttpRequest){
+					obj.style.setExpression('top', dom + '.scrollTop+'+this.top);
+					}else{			
+						obj.style.top = this.top+'px';			
+					}
+				}			
+			}
+			/*水平居住*/
+			
+			if(this.left == 'center'){		
+				obj.style.left = '50%';
+				obj.style.marginLeft = -(obj.offsetWidth)/2+'px'			
+			}else{			
+				if(this.left!==''){//自设距离左
+					obj.style.marginLeft = 0+'px';
+					obj.style.left = this.left+'px';
+				}
+			}
+		
+			/*right*/
+			if(this.right !==''){
+				obj.style.marginLeft = 0+'px';
+				//obj.style.left = 'auto';			
+				obj.style.right = this.right+'px';
+			}
+
+			/*bottom*/
+			if(this.bottom !==''){
+				//obj.style.top = 'none';
+				document.title = this.bottom
+				if(window.ActiveXObject && !window.XMLHttpRequest){
+					obj.style.setExpression('top', dom + '.scrollTop+'+(eval(dom).clientHeight-obj.offsetHeight-this.bottom));
+				}else{			
+					obj.style.bottom = this.bottom+'px';			
+				}
+			}
+		}
+	},
+	/*关闭*/
+	closeMask:function(obj){
+		var that = this;
+		if(this.mask){
+			if(this.animit){
+				startMove(this.mask,{opacity:0},function(){
+					document.body.removeChild(that.mask);
+					that.mask = null;
+				})
+			}else{
+				document.body.removeChild(this.mask);
+				this.mask = null;
+			}
+			document.onkeypress = function(){
+				return true;
+			}
+		}		
+		obj.style.display = 'none';		
+		if(window.ActiveXObject && !window.XMLHttpRequest){
+			obj.style.removeExpression('top');
+			obj.style.removeExpression('left');
+		}
+	}
+}
+
