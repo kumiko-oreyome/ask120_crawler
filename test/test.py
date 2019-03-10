@@ -1,5 +1,5 @@
 import unittest
-from src.webparser import parse_single_question_page,is_valid_single_question
+from src.webparser import parse_single_question_page,is_valid_single_question, QuestionListPage
 from src.item import QuestionItem,AnswerItem,QAItem,create_qa_item
 from src.db import  MongoConnector
 from src.backend import MongoQABackend
@@ -16,8 +16,7 @@ class WebPageParserTest(unittest.TestCase):
         l = [('http://www.120ask.com/question/73715734.htm','73715734'),('http://www.120ask.com/question/26077691.htm','26077691')]
         with open(self.question_list_file,'r',encoding='utf-8') as f:
             src = f.read()
-            #res = list(parse_question_list_page(src))
-            res = []
+            res = list(QuestionListPage(src).get_question_infos())
             self.assertEqual(10,len(res))
             self.assertEqual(l,res[0:2])
 
@@ -96,6 +95,7 @@ def suite():
     suite = unittest.TestSuite()  
     suite.addTests([ ItemTest('test_qa_item')])
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase( MongoBackendTest))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(  WebPageParserTest))
     return suite
 
 if __name__ == '__main__':

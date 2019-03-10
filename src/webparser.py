@@ -25,7 +25,6 @@ class QuestionListPage():
             if self.is_valid_question_link(link):
                 m = re.search(r'([0-9]+)\.htm',link)
                 qid = m.group(1)
-                #print(link)
                 yield link,qid
 
     def get_next_page_link(self):
