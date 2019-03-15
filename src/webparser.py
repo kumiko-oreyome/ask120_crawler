@@ -4,6 +4,7 @@ import re
 
 
 
+
 class QuestionListPage():
     def __init__(self,page_src):
         self.page_src = page_src
@@ -45,10 +46,14 @@ def is_valid_single_question(title,description):
 
 def parse_single_question_page(page_src):
     html_root = etree.HTML(page_src)
-    title = html_root.xpath("//h1[@id='d_askH1']//text()")[0]
-    #print('title %s'%(title))
-    description_node = html_root.xpath("//div[@class='b_askbox']//div[@class='b_askcont']//p[@class='crazy_new']")[0]
-    description = description_node.xpath("./text()")[1].strip()
+    title = 'no-title'
+    description = 'no-description'
+    try :
+        title = html_root.xpath("//h1[@id='d_askH1']//text()")[0]
+        description_node = html_root.xpath("//div[@class='b_askbox']//div[@class='b_askcont']//p[@class='crazy_new']")[0]
+        description = description_node.xpath("./text()")[1].strip()
+    except:
+        print('something wrong while parsing header of title %s'%(title))
     answers  = []
     #parse answers
     responses =  html_root.xpath("//div[@class='b_answerli']")
@@ -64,5 +69,4 @@ def parse_single_question_page(page_src):
             answers.append({'job':rlstrip(job),'answer':rlstrip(answer),'time':rlstrip(time)})
         except :
             print('something wrong while parsing responses of title %s'%(title))
-
     return title,description,answers

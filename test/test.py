@@ -1,8 +1,14 @@
 import unittest
 from src.webparser import parse_single_question_page,is_valid_single_question, QuestionListPage
-from src.item import QuestionItem,AnswerItem,QAItem,create_qa_item
+from src.item import QuestionItem,AnswerItem,QAItem
 from src.db import  MongoConnector
 from src.backend import MongoQABackend
+import config
+
+def create_qa_item(qid,title,description,answers):
+    q = QuestionItem(qid,title,description)
+    answers = [ AnswerItem(content,time,job)  for content,time,job  in answers]
+    return QAItem(q,answers)
 
 class WebPageParserTest(unittest.TestCase):
 
@@ -45,14 +51,29 @@ class ItemTest(unittest.TestCase):
             return self.assertEqual(d1[field_name],d2[field_name])
 
         qa = {'title':'hasaki','description':'fuck','qid':'8787',\
-        'answers':[{'job':'fucker','content':'qwer','time':'2011-2-3'},{'job':'AAA','content':'BBB','time':'2012-11-3'}]}
+        'answers':[{'job':'fucker','content':'qwer','time':'2011-2-3 00:22:12'},{'job':'AAA','content':'BBB','time':'2012-11-3 00:00:00'}]}
         q_item = QuestionItem('8787','hasaki','fuck')
-        a_items = [AnswerItem('qwer','2011-2-3','fucker'),AnswerItem('BBB','2012-11-3','AAA')]
+        a_items = [AnswerItem('qwer','2011-2-3 00:22:12','fucker'),AnswerItem('BBB','2012-11-3 00:00:00','AAA')]
         qa_item = QAItem(q_item,a_items)
         d = qa_item.to_dict()
         same_field(d,qa,'title')
         same_field(d,qa,'description')
         same_field(d,qa,'qid')
+    
+    def test_create_qa_item_from_document(self):
+        doc = {'title':'hasaki','description':'fuck','qid':'8787',\
+        'answers':[{'job':'fucker','content':'qwer','time':'2011-2-3 00:22:12'},{'job':'AAA','content':'BBB','time':'2012-11-3 00:00:00'}]}
+        qa_item = QAItem.create_from_document(doc)
+        self.assertEqual(qa_item.get_title(),'hasaki')
+        self.assertEqual(qa_item.answer_list[0].job,'fucker')
+       
+
+    def test_find_newest_answer(self):
+        q_item = QuestionItem('8787','hasaki','fuck')
+        a_items = [AnswerItem('qwer','2011-2-3 00:22:12','fucker'),AnswerItem('BBB','2012-11-3 00:00:00','AAA')]
+        qa_item = QAItem(q_item,a_items)
+        self.assertEqual(qa_item.find_newest_answer().content,'BBB')
+
 
         
         
@@ -61,25 +82,37 @@ class MongoBackendTest(unittest.TestCase):
     def setUpClass(cls):
         #create test db
         fake_datas = []
-        fake_datas.append(create_qa_item('id1','title1','descirption1',[('content1_1','time_1_1','job_1_1'),('content1_2','time_1_2','job_1_2'),('content1_3','time_1_3','job_1_3')]))
-        fake_datas.append(create_qa_item('id2','title2','descirption2',[('content2_1','time_2_1','job_2_1')]))
-        fake_datas.append(create_qa_item('id3','title3','descirption3',[('content3_1','time_3_1','job_3_1'),('content3_2','time_3_2','job_3_2'),('content3_3','time_3_3','job_3_3')]))
-        fake_datas.append(create_qa_item('id4','title4','descirption4',[('content4_1','time_4_1','job_4_1'),('content4_2','time_4_2','job_4_2')]))
-        host = '192.168.99.101'
-        connector =  MongoConnector(host,'foo','foo','test120')
+        fake_datas.append(create_qa_item('id1','title1','descirption1',[('content1_1','2012-2-3 00:22:14','job_1_1'),('content1_2','2012-2-3 00:22:12','job_1_2'),('content1_3','2011-2-3 00:22:13','job_1_3')]))
+        fake_datas.append(create_qa_item('id2','title2','descirption2',[('content2_1','2011-2-3 00:22:12','job_2_1')]))
+        fake_datas.append(create_qa_item('id3','title3','descirption3',[('content3_1','2017-2-3 00:22:12','job_3_1'),('content3_2','2011-2-3 00:22:12','job_3_2'),('content3_3','2011-2-2 00:22:12','job_3_3')]))
+        fake_datas.append(create_qa_item('id4','title4','descirption4',[('content4_1','2017-2-3 00:22:12','job_4_1'),('content4_2','2011-2-3 00:22:13','job_4_2')]))
+  
+        connector =  MongoConnector(config.DB_HOST,config.TEST_DB_USER_NAME,config.TEST_DB_PASSWORD,config.TEST_DB_NAME)
 
-        if  'faq' in connector.db.collection_names():
-            connector.get_collect('faq').drop()
-        connector.create_collect('faq')
+        if  config.QA_COLLECT_NAME in connector.db.collection_names():
+            connector.get_collect(config.QA_COLLECT_NAME).drop()
+        connector.create_collect(config.QA_COLLECT_NAME)
         cls.fake_datas = fake_datas
         cls.connector = connector
-        
+    
+
+    def test_retrieve_qas(self):
+        backend = MongoQABackend(self.connector,config.QA_COLLECT_NAME)
+        qas1 = backend.retrieve_qas(find_newest=True)
+        qas2 = backend.retrieve_qas(find_newest=False)
+        self.assertEqual(len(qas1),4)
+        self.assertEqual(qas1,[('title1','content1_1'),('title2','content2_1'),('title3','content3_1'),('title4','content4_1')])
+        self.assertEqual(len(qas2),4)
+        self.assertEqual(qas2[0].answer_list[0].content,'content1_1')
+        self.assertEqual(qas2[3].answer_list[1].job,'job_4_2')
+        self.assertEqual(len(qas2[0].answer_list),3)
+
     
     def test_insert_qa(self):
-        backend = MongoQABackend(self.connector,'faq')
+        backend = MongoQABackend(self.connector,config.QA_COLLECT_NAME)
         for d in  self.fake_datas:
             backend.save_qa_instance(d)
-        collect =  self.connector.get_collect('faq')
+        collect =  self.connector.get_collect(config.QA_COLLECT_NAME)
         qas = list(collect.find())
         self.assertEqual(len(qas),4)
 
@@ -88,12 +121,12 @@ class MongoBackendTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.connector.get_collect('faq').drop()
+        cls.connector.get_collect(config.QA_COLLECT_NAME).drop()
 
 
 def suite():  
     suite = unittest.TestSuite()  
-    suite.addTests([ ItemTest('test_qa_item')])
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(ItemTest))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase( MongoBackendTest))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(  WebPageParserTest))
     return suite
