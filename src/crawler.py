@@ -20,6 +20,9 @@ class Ask123Crawler():
         self.asession = AsyncHTMLSession()
         self.driver =  driver 
         self.backend = backend
+
+        self.MAX_TIME_RETRY = 20
+        self.retry_cnt = 0
         
     def crawl_single_question_page(self,url,qid):
         async def foo():
@@ -47,6 +50,8 @@ class Ask123Crawler():
                     self.asession.run(*[ self.crawl_single_question_page(link,qid) for link,qid in zip(links,ids)])
                 current_url = urljoin(start_url,next_link)
 
+    
+
     def crawl_question_list_page(self,url):
         self.driver.implicitly_wait(15)
         self.driver.get(url)
@@ -55,7 +60,13 @@ class Ask123Crawler():
         #有的時候第一時間沒有辦法渲染全部就直接parse了 然後就出錯 所以要check
         if not parser.check_page_ready():
             print('request again : %s'%(url))
+            self.retry_cnt+=1
+            if self.retry_cnt > self.MAX_TIME_RETRY:
+                print('Retry > MAX TIME .... GG')
+                return [],[],None
             return self.crawl_question_list_page(url)
+        self.retry_cnt = 0
+
         result = list(parser.get_question_infos())
         links,ids = [],[]
         if len(result)>0:
