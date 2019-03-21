@@ -1,0 +1,302 @@
+/**
+ * [ad]
+ * @Author    Miliguy
+ * @DateTime  2018-09-01
+ * @copyright [珠海健康云科技有限公司]
+ */
+var YWBD_OVERDUE = 86400;
+var YWBD_COOKIE_NAME = 'TUSHENGSID';
+var YWBD_URL = '//ax.120ask.com';
+var YWBD_LOG_IMG = "YWBD_LOG_IMG";
+var YWBD_LOG_URL = '//log.120ask.com/luaLog';
+var YWBD_EVENT_NAME = 'YWBDAD';
+var YWBD_AREA_ID = '';
+
+function YWBD() {
+    this.YWBD_PM = new Array();
+    this.YWBD_PTYPE = 'pType';
+    this.YWBD_PVALUE = 'pValue';
+    this.YWBD_EVENT_NAME = YWBD_EVENT_NAME;
+    this.LOG = false;
+    this.AREA_ID = null;
+    this.KEYWORDS_ID = null;
+    this.SID = null
+};
+YWBD.prototype = {
+    YWBD_AD_AJAX: function(b, c, d) {
+        b = this.YWBD_AD_PLACE(b);
+        URL = this.YWBD_GET_URL();
+        var e = this;
+        $.getJSON(URL, function(a) {
+            if (a) {
+                e.YWBD_WRITE(a, b, c)
+            } else {
+                if (d) {
+                    e.YWBD_NONE(d)
+                }
+            }
+        });
+        this.YWBD_CLEAR_PARAMS()
+    },
+    YWBD_AD_PLACE: function(a) {
+        if (a) {
+            if (!(a instanceof jQuery)) {
+                a = $(a)
+            }
+        } else {
+            a = $('body')
+        };
+        return a
+    },
+    YWBD_AD_JS: function() {
+        URL = this.YWBD_GET_URL();
+        var a = "<script src="
+    },
+    YWBD_GET_URL: function() {
+        var a = '';
+        var b = '';
+        var c = '';
+        for (key in this.YWBD_PM) {
+            a += key + '=' + this.YWBD_PM[key] + '&'
+        };
+        return YWBD_URL + '/getMongoAd.php?callback=?&' + a + Math.random()
+    },
+    YWBD_WRITE: function(a, b, c) {
+        if (a && typeof(a) == 'object') {
+            if (a.v.type == 0) {
+                var p = '<div class="' + this.YWBD_EVENT_NAME + '" aid=' + a.v.adId + ' vid=' + a.v.advId + '>'
+            } else {
+                var p = '<div class="' + this.YWBD_EVENT_NAME + ' YWBD_SPREAD" aid=' + a.v.adId + ' vid=' + a.v.advId + '>'
+            }
+            p = p + a.code + "</div>";
+            if (a && this.YWBD_LOG) {
+                var d = this.YWBD_LOG_CODE(a.v.adId, a.v.advId);
+                p = p + d
+            };
+            b.append(p)
+        } else {
+            b.append(a)
+        };
+        this.YWBD_CLICK_LOG();
+        if (c && typeof c != 'undefined') {
+            eval(c + '()')
+        }
+        $("."+this.YWBD_EVENT_NAME+" a").attr("rel","nofollow noopener noreferrer")
+    },
+    YWBD_NONE: function(a) {
+        if (a && typeof a !== 'undefined') {
+            eval(a + '()')
+        }
+    },
+    YWBD_GET_PARAMS: function(a) {
+        return this.YWBD_PM[a]
+    },
+    YWBD_SET_PARAMS: function(a, b) {
+        if (a && b) {
+            this.YWBD_PM[a] = b
+        }
+    },
+    YWBD_ADD_PARAMS: function(a, b) {
+        if (a && b) {
+            if (this.YWBD_PM[a]) {
+                this.YWBD_PM[a] += '|' + b
+            } else {
+                this.YWBD_PM[a] = b
+            }
+        }
+    },
+    YWBD_SET_AREA_PARAMS: function(a) {
+        if (a) {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 1);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, a)
+        } else {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 1);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, this.YWBD_GET_AREAID())
+        }
+    },
+    YWBD_SET_CLASS_PARAMS: function(a) {
+        if (a) {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 2);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, a)
+        }
+    },
+    YWBD_SET_KEYWORD_PARAMS: function(a) {
+        if (a) {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 3);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, a)
+        } else {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 3);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, this.YWBD_GET_KEYWORDSID())
+        }
+    },
+    YWBD_SET_USER_PARAMS: function(a) {
+        if (a) {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, 4);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, a)
+        }
+    },
+    YWBD_SET_OTHER_PARAM: function(a, b) {
+        if (b && a) {
+            this.YWBD_ADD_PARAMS(this.YWBD_PTYPE, a);
+            this.YWBD_ADD_PARAMS(this.YWBD_PVALUE, b)
+        }
+    },
+    YWBD_LOG_CODE: function(a, b) {
+        var c = '';
+        if (a && b && this.YWBD_LOG) {
+            var d = YWBD_GET_SID();
+            var e = "&aId=" + a + "&vId=" + b + "&SID=" + d + '&ref=' + escape(window.location.href);
+            c = "<script>";
+            c += "YWBD_SEND_IMG('" + e + "',141);";
+            c += "</script>"
+        };
+        return c
+    },
+    YWBD_SET_LOG: function() {
+        this.YWBD_LOG = true
+    },
+    YWBD_CLICK_LOG: function() {
+        if (this.YWBD_LOG) {
+            $("." + this.YWBD_EVENT_NAME).unbind('click');
+            $("." + this.YWBD_EVENT_NAME).bind('click', function() {
+                var a = $(this).attr('aid');
+                var b = $(this).attr('vid');
+                var c = YWBD_GET_SID();
+                var d = '&aId=' + a + '&vId=' + b + '&SID=' + c + '&ref=' + escape(window.location.href);
+                YWBD_SEND_REQUEST(d, 142)
+            })
+        }
+    },
+    YWBD_CLEAR_PARAMS: function() {
+        this.YWBD_PM.length = 0;
+        this.YWBD_PM = new Array()
+    },
+    YWBD_GET_AREAID: function() {
+        if (typeof(_RET_IP) != 'undefined') {
+            if (_RET_IP.status == 0 && _RET_IP.message[0]) {
+                var a = _RET_IP.message[0].id;
+                var b = parseInt(a / 10000) * 10000;
+                if (b != a) {
+                    a = a + "," + b
+                };
+                return a
+            }
+        };
+        return ''
+    },
+    YWBD_GET_KEYWORDSID: function(a) {
+        if (typeof(_AD_KEYWORDS) != 'undefined') {
+            return _AD_KEYWORDS
+        }
+        return '0'
+    }
+};
+
+function YWBD_LOG() {
+    this.YWBD_UP_PROXY_DATA = 'YWBD_UP_PROXY_DATA'
+};
+YWBD_LOG.prototype = {
+    YWBD_LOAD: function() {
+        var a = YWBD_GET_SID();
+        var b = "&SID=" + a;
+        YWBD_SEND_REQUEST(b, 101)
+    },
+    YWBD_REFFER: function(a) {
+        var b = YWBD_GET_SID();
+        var c = "&SID=" + b + "&ref=" + a;
+        YWBD_SEND_IMG(c, 102)
+    },
+    YWBD_BIND_CLICK: function() {
+        $('body').bind("click", function(a) {
+            var b = YWBD_GET_SID();
+            var X = a.pageX;
+            var Y = a.pageY;
+            var c = '&SID=' + b + '&X=' + X + '&Y=' + Y;
+            YWBD_SEND_IMG(c, 121)
+        })
+    },
+    YWBD_BIND_A_CLICK: function() {
+        $('a').live("click", function() {
+            var a = YWBD_GET_SID();
+            var b = '&SID=' + a;
+            YWBD_SEND_REQUEST(b, 112)
+        })
+    }
+};
+
+function YWBD_AD_SEND_REQUEST(a, b, c) {
+    c = $(c).parent('.' + YWBD_EVENT_NAME);
+    var d = c.attr('aid');
+    var e = c.attr('vid');
+    var f = YWBD_GET_SID();
+    var g = '&aId=' + d + '&vId=' + e + '&fId=' + a + '&SID=' + f;
+    YWBD_SEND_REQUEST(g, b)
+};
+
+function YWBD_SEND_REQUEST(a, b) {
+    $.getScript(YWBD_LOG_URL + '?t=' + b + a + '&r=' + Math.random())
+};
+
+function YWBD_SEND_IMG(a, b) {
+    var c = new Image();
+    c.src = YWBD_LOG_URL + '?t=' + b + a + '&r=' + Math.random();
+    c.onload = function() {
+        c.onload = null
+    };
+    c.style.display = 'none';
+    document.body.appendChild(c)
+};
+
+function YWBD_SET_SID() {
+    var a = YWBD_GETCOOKIE(YWBD_COOKIE_NAME);
+    if (!a) {
+        var b = new Date().getTime();
+        a = 'TS' + b;
+        YWBD_SETCOOKIE(YWBD_COOKIE_NAME, a, 's' + YWBD_OVERDUE)
+    };
+    a = YWBD_GETCOOKIE(YWBD_COOKIE_NAME);
+    return a
+};
+
+function YWBD_GET_SID() {
+    return this.YWBD_SET_SID()
+};
+
+function YWBD_SETCOOKIE(a, b, c) {
+    var d = YWBD_GETSEC(c);
+    var e = new Date();
+    e.setTime(e.getTime() + d * 1);
+    document.cookie = a + "=" + escape(b) + ";expires=" + e.toGMTString() + ";path=/;domain=.120ask.com"
+};
+
+function YWBD_GETSEC(a) {
+    var b = a.substring(1, a.length) * 1;
+    var c = a.substring(0, 1);
+    if (c == "s") {
+        return b * 1000
+    } else if (c == "h") {
+        return b * 60 * 60 * 1000
+    } else if (c == "d") {
+        return b * 24 * 60 * 60 * 1000
+    } else if (c == "m") {
+        return b * 60 * 1000
+    };
+    return null
+};
+
+function YWBD_GETCOOKIE(a) {
+    var b, reg = new RegExp("(^| )" + a + "=([^;]*)(;|$)");
+    if (b = document.cookie.match(reg)) return (b[2]);
+    else return null
+}
+var styHtml = '<style>.YWBDAD{position:relative;}.YWBDAD:after {content: "广告"; position: absolute;right:0;bottom:2px;font-size:8px;background-color:rgba(0,0,0,.16);padding:0 1px;color:#fff;}.YWBD_SPREAD:after{content: "";}</style>';
+document.write(styHtml);
+
+if (typeof(eval(Fingerprint2)) == "function"){
+    var uuid = YWBD_GETCOOKIE('comHealthCloudUserProfileUseTag');
+    if (!uuid) {
+        new Fingerprint2().get(function(result, components) {
+            YWBD_SETCOOKIE('comHealthCloudUserProfileUseTag',result , 's'+(365*10*86400));
+        })
+    }
+}

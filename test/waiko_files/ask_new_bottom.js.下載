@@ -1,0 +1,55 @@
+/**
+ * @author pengchao  20130227 
+ * 整理js  需要在页面底部执行的js
+ */
+
+/*读cookie*/
+function getCookieNew(name)
+{
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return (arr[2]);
+    else
+        return null;
+}
+/*写cookie*/
+function setCookieNew(name,value,days,domain,path)
+{
+	if(!days) days = 30; //此 cookie 将被保存 30 天
+	if(!domain) domain = '.120ask.com';
+	var exp = new Date();    //new Date("December 31, 9998");
+	exp.setTime(exp.getTime() + days*24*60*60*1000);
+	//document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/");
+	document.cookie=name+ "=" +escape(value)+ ((days==null) ? "" : ";domain="+ domain +";expires="+exp.toGMTString()+";path=/"); 
+}
+
+
+/* 设置搜索框里的文字 */ 
+function setSearchBoxText(){
+	var more_content = document.getElementById('valSearchOrAsk');
+	var more_content2 = document.getElementById('valSearchOrAsk2');
+	var more_content3 = document.getElementById('valSearchOrAsk3');
+	if("undefined"!==typeof(postTitle)){
+		k=postTitle;//底层页标题
+		setCookieNew('searchBoxText',k,7);
+	}else{
+		k = unescape(getCookieNew('searchBoxText'));
+		if(k=='null' || k==null) k='';
+	}
+	if(k && more_content){
+		more_content.style.color='#f60';
+		more_content.style.fontWeight = "600";
+		more_content.value=decodeURI(k).replace('+',' ');
+	}
+	
+	if(k && more_content2){
+		more_content2.style.color='#f60';
+		more_content2.style.fontWeight = "600";
+		more_content2.value=decodeURI(k).replace('+',' ');
+	}
+	
+	if(k && more_content3){
+		more_content3.value=decodeURI(k).replace('+',' ');
+	}
+}
+setSearchBoxText();

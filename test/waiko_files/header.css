@@ -1,0 +1,73 @@
+@charset "utf-8";
+body,textarea,input,select,option {font-size:12px;color:#333;font-family:Tahoma,Arial,sans-serif;}h1,h2,h3,h4,h5,h6 {font-size:100%;}body,h1,h2,h3,h4,h5,h6,blockquote,ol,ul,dl,dd,p,textarea,input,select,option,form {margin:0;}ol,ul,li,textarea,input,select,option,th,td {padding:0;}table {border-collapse:collapse;}ol,ul {list-style-type:none;}.clears:before,.clears:after {content:'';display:table;}.clears:after {clear:both;}.clears {*zoom:1;}.clear {clear:both;height:0;overflow:hidden;}a {text-decoration:none;color:#333;}a,textarea,input{outline:none}textarea {overflow:auto;resize:none;}.img img {display:block;}a img {border:none;}.z_index{position:fixed;_position:absolute;z-index:999;display:none;}label,label input{vertical-align:middle}.pr {position:relative;}.pa {position:absolute;}.fl {float:left;}.fr {float:right;}
+.m980 {width:980px; margin-left:auto; margin-right: auto;}.t10 {margin-top:10px;}a:hover{text-decoration:underline}.m978{margin:0 auto;width:978px;}
+body{word-wrap:break-word;word-break:break-all; }/*background: url(//cdn.120askimages.com/ask/images/kongbai.png);*/
+
+
+/*120ask头部样式*/
+body{_background-image:url(about:blank);_background-attachment:fixed;}
+.top_search_box,.top_info_cur .top_sp,.top_user_cur .top_sp{background:url(//cdn.120askimages.com/ask/images/header/top_bg.png) repeat-x;}
+.top_search_inp,.top_consult i,.top_message i,.top_info_nav i,.top_info_nav,.top_navul a{background:url(//cdn.120askimages.com/ask/images/header/top_icobg.png) no-repeat;}
+.top_fixed{width:100%;min-width:980px;_height:60px;border-top:3px solid #4ab317;}
+.top_fixed_box{background-color:#E4F3D6;height:59px;min-width:980px;}
+.top_header .logo{float:left;height:59px;width:166px;overflow:hidden;}
+.top_header .logo img{float:left;height:59px;}
+.top_search{padding-top:12px;position:relative;float:left;display:inline;margin-right:12px;width:470px;}
+.top_search_box{background-position:0 -72px;border:2px solid #a3c48a;height:32px;border-right:none;width:290px;position:relative;float:left;}
+.top_search_boxno{width:295px;}
+.top_search_inp{background-position:8px 8px;width:250px;height:14px;padding:8px 6px 8px 34px;color:#999;border:none;height:16px;font-size:12px;overflow:hidden; _float:left;}
+.top_search_boxno .top_search_inp{width:250px;}
+.top_search_btn{background:url(//cdn.120askimages.com/ask/images/header/top_bg.png) no-repeat;background-position:0 0;width:110px;height:36px; border:none;font-size:14px;font-weight:bold;color:#fff;float:left;cursor:pointer;}
+.top_search_btn:hover{background:url(//cdn.120askimages.com/ask/images/header/top_bg.png) no-repeat;background-position:0 -36px;}
+.top_search_down{width:398px;display:none;position:absolute;border:2px #71a850 solid;background:#fff;left:-2px;top:34px;padding-bottom:10px;}
+.top_search_boxno .top_search_down{width:438px;}
+.top_searchul{padding-top:5px;}
+.top_searchul li{height:30px;line-height:30px;padding-left:3px;color:#333;font-size:14px;}
+.top_searchli_hov{background-color:#eee;}
+.top_searchul li em{background-color:#888;font-family:arial;height:15px;width:15px;line-height:15px; overflow:hidden;text-align:center;color:#fff;float:left;margin:8px 10px 0 9px;font-size:12px;font-style:normal;border-radius:2px;}
+.top_searchul li span{color:#999;margin-left:20px;font-size:12px;}
+.top_searchul li .p_numhot{background-color:#fe6c0f;}
+.top_search_more{height:20px;margin-top:10px;color:#025e99;text-align:center;display:block;overflow:hidden;line-height:20px;font-size:12px;}
+.top_search_more:hover{background-color:#fff;}
+.top_navbtn{float:left;padding-top:12px;}
+.top_navbtn a{background:url(//cdn.120askimages.com/ask/images/header/top_bg.png) no-repeat;background-position:0 -184px;width:76px;height:36px;display:block;line-height:36px;color:#fff;padding-left: 15px;font-size: 14px;font-weight: bold;}
+.top_navbtn a:hover{text-decoration:none;}
+.top_nav{float:left;}
+.top_nav a{display:inline-block;height:20px;line-height:20px;margin:19px 7px 0 7px;}
+.top_nav a i{height:20px;width:20px;display:inline-block;vertical-align:middle;margin-right:4px;}
+.top_consult i{background-position:0 -34px;}
+.top_message i{background-position:0 -98px;}
+.top_nav span{color:#ff6600;}
+.top_login{float:right;margin-top:20px;color:#999;}
+.top_login a{line-height:16px;display:inline-block;}
+.top_login .top_qq_btn{background:url(//cdn.120askimages.com/ask/images/header/top_bg.png) no-repeat;background-position:-60px -164px;width:50px;height:16px;overflow:hidden;margin-right:8px;vertical-align:-3px;}
+.top_user_name{font-size:50px;display:block;float:left;line-height:44px;}
+.top_user_name img{ display:inline-block; background-color:#fff;border:1px solid #9ccb6f;width:16px; height:16px;padding:1px;overflow:hidden;vertical-align:middle;margin-right:5px;}
+.top_user_name span{vertical-align:middle;display:inline-block;line-height:16px;font-size:12px;width:72px;}
+.top_user_name a{color:#025e99;display:block;}
+.top_user,.top_info{height:59px;width:110px;position:relative;float:right;z-index:99;}
+.top_user{float:right;}
+.top_sp{height:40px;line-height:18px;width:100px;display:block;padding:20px 0 0 10px;overflow:hidden;}
+.top_info_cur .top_sp{background-position:0 -104px;display:block;border:solid 1px #dfeed6;border-bottom:none;height:41px;width:99px;padding:19px 0 0 9px;padding-left:9px;position:absolute;}
+.top_user .top_sp{height:58px;padding:1px 0 0 10px;width:100px;}
+.top_user_cur .top_sp{background-position:0 -104px;display:block;border:solid 1px #dfeed6;border-bottom:none;height:59px;width:99px;padding:0 0 0 9px;position:absolute;}
+.top_info_nav{display:inline-block;height:40px;width:100px;}
+.top_info_nav i{background-position:0 -68px;height:20px;width:20px;display:inline-block;vertical-align:middle;margin-right:4px;}
+.top_info_nav{background-position:73px -178px;}
+.top_info_cur .top_info_nav{background-position:73px -136px;position:relative;z-index:99;}
+.top_user_cur .top_info_nav{background-position:73px -136px;position:relative;z-index:99;}
+.top_navul{display:none;background-color:#fff;position:absolute;top:59px;left:0px;width:108px;border:1px solid #b2d995;box-shadow:2px 2px 3px rgba(0,0,0,0.2);border-top:none;z-index:9;}
+.top_navul li{height:32px;line-height:32px;overflow:hidden;}
+.top_navul a{background-position:0 -210px;padding-left:25px;display:block;border-top:1px solid #e1ecdc;height:31px;}
+.top_navul a:hover{background-color:#eefbe2;color:#419900;text-decoration:none;}
+
+/*120ask最顶部样式*/
+.top_tip{ background-color:#FDF8BE;line-height:30px;height:30px;} 
+.top_tip span{ display:block;} 
+.top_tip em{font-style:normal;font-size:16px; font-family:Verdana, Geneva, sans-serif; cursor:pointer;width:20px; height:20px;float:right;margin:5px 5px 0 0; line-height:20px; text-align:center;} 
+.top_bb{position:fixed;z-index:2147483647;top:0;width:100%;min-width:980px;_position:absolute;_top:expression(eval(document.documentElement.scrollTop));}
+
+/*百度站内搜索样式*/
+.bdcs-container .bdcs-search-form-input {background-color: #FFF;}
+.bdcs-search-form-submit{font-weight:bold;}
+.top_search .bdcs-container .bdcs-search-form-submit{width:100px;height: 34px;}

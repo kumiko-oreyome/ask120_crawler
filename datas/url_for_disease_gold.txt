@@ -1,0 +1,14 @@
+糖尿病-->糖尿病,https://www.120ask.com/list/tangniaobing/
+高血壓-->高血压,https://www.120ask.com/list/gaoxueya/
+高血脂-->心血管内科,https://www.120ask.com/list/xxgnk/
+心臟病-->心血管内科,https://www.120ask.com/list/xxgnk/
+冠心病-->冠心病,https://www.120ask.com/list/guanxinbing/
+痛風-->痛风,https://www.120ask.com/list/tongfeng/
+肝硬化-->肝硬化,https://www.120ask.com/list/ganyinghua/
+骨質疏鬆症-->骨科,https://www.120ask.com/list/guke/
+腦瘤-->颅脑肿瘤,https://www.120ask.com/list/lnzl/
+青光眼-->https://www.120ask.com/list/qingguangyan/
+白內障-->白内障,https://www.120ask.com/list/baineizhang/
+帕金森-->帕金森病,https://www.120ask.com/list/pjsb/
+氣喘-->呼吸内科,https://www.120ask.com/list/xiaochuan/
+癌症-->肿瘤科,https://www.120ask.com/list/zhongliuke/

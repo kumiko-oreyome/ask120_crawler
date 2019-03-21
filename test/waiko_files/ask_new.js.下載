@@ -1,0 +1,61 @@
+/**
+ * @author pengchao  20130227 
+ * 整理js
+ */
+ 
+ //监听用户回车事件
+	$(function(){
+		document.onkeydown = function(e){
+		    var ev = document.all ? window.event : e;
+		    if(ev.keyCode==13) {
+					
+		    	var act = document.activeElement.id;
+		    	if("valSearchOrAsk" == act ){
+		    		 btnSearchOrAsk(1,'valSearchOrAsk');
+		    	}
+					return;
+		     }
+		}
+});
+
+/*
+头部点击更多答案和免费提问 
+opt 1搜索  0提问 
+*/
+function btnSearchOrAsk(opt,idv){
+	var kv = $("#"+idv).val();
+	if(kv=='无需注册,5分钟回复,50000名认证三甲医生,98%用户表示满意。') kv="";
+	if(opt==0){
+		var openUrl = "http://www.120ask.com/ask_qus.php?fromurl="+idv+"&title="+escape(kv);
+	}else{
+		if(kv.length<1){
+			alert('请您先输入内容，谢谢您的支持！');return false;
+		}		
+		if(kv.length>50){
+			alert('您输入的内容太长，为了能得到正确的结果，请您优化后尝试，谢谢您的支持！');return false;
+		}		
+		//修改搜索时，跳转到标签搜索 2012-6-25 LV
+		//var openUrl = "http://www.120so.com/search.php?cate=1&key="+escape(kv);
+		//var openUrl = "http://www.120ask.com/rel/q/?w="+encodeURI(kv)+"&f=s";
+		//var openUrl = "http://so.120ask.com/ask?kw="+encodeURI(kv);
+		//var openUrl = "http://zhannei.120ask.com/cse/search?s=16363742911716890051&q="+encodeURI(kv);
+		//var openUrl = "http://www.120ask.com/new/cse/search?kw="+encodeURI(kv); 
+		var openUrl = "http://so.120ask.com/?kw="+encodeURI(kv);
+		setCookieNew('searchBoxText',kv,7);
+	}
+	window.open(openUrl);return false;
+}
+
+/*
+点击搜索框效果
+val 当前搜索框里的值
+opt 事件类型  1 onfocus   0 onblur
+*/
+function clickSearchOrAskVal(obj,opt){
+	valDefault = '无需注册,5分钟回复,50000名认证三甲医生,98%用户表示满意。';
+	if(opt){
+		if(obj.value==valDefault) obj.value = '';
+	}else{
+		if(obj.value=='') obj.value = valDefault;
+	}
+}

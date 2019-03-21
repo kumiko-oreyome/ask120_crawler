@@ -1,0 +1,20 @@
+@charset "utf-8";
+#topbar{width:100%;background-color:#EBF2E9 ;/*border-bottom:2px solid #7fbb3e;*/height:37px;}
+#topbar a{color:#666;}
+#topbar .topbar-bd{margin:0 auto;height:37px;line-height:37px;color:#666;}
+#topbar p{float:left;padding-right:10px;margin-right:10px;}
+#topbar .btask{position:relative;display:block;font-style:normal;cursor:pointer;float:left;height:39px;line-height:37px;padding:0 8px;background:#6eb14a;text-align:center;color:#fff;text-decoration:none;font-weight:bold;margin-right:20px;box-shadow:0 -8px 8px #000;border-bottom:4px solid #88d45f}
+#topbar .quick-link{float:right;}
+#topbar .logined-info li,.quick-link li{float:left;padding-right:6px;margin-right:6px;}
+#topbar .login-info em{cursor:pointer;color:#666;font-style:normal;}
+#topbar .w1100{width:1100px;}
+#topbar .w980{width:980px;}
+.untopbar{height:37px;display: none;}
+@media (min-width: 1024px){
+  #topbar .topbar-bd {width:1200px;}
+}
+@media (max-width: 1024px){
+  #topbar .topbar-bd {width:1000px;}
+}
+
+
