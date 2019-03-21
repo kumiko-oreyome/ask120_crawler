@@ -3,3 +3,4 @@
 *.exe
 *debug.log
 config.py
+*Pipfile*
