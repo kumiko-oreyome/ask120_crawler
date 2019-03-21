@@ -54,6 +54,16 @@ class DepartmentOfKeywordCallback():
 
 
 
+class DepartmentListRequest():
+    def __init__(self,driver):
+        self.driver = driver
+    def send(self,url):
+        self.driver.implicitly_wait(15)
+        self.driver.get(url)
+        #有的時候第一時間沒有辦法渲染全部就直接parse了 然後就出錯 所以要check
+        return self.driver.page_source
+
+
 class AsyncHealthPageCallback():
     def __init__(self,qid,backend=None):
         self.backend = backend

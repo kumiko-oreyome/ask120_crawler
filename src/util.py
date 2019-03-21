@@ -1,7 +1,17 @@
 from selenium  import webdriver
 import unicodedata
+import re
 
 
+
+def  https_completion(url):
+    if not url.startswith("https:"):
+        url = "https:"+url
+    return url
+        
+def extract_qid(link):
+    m = re.search(r'([0-9]+)\.htm',link)
+    return  m.group(1)
 
 
 def rlstrip(s):

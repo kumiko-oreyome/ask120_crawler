@@ -7,7 +7,7 @@
 肝硬化-->肝硬化,https://www.120ask.com/list/ganyinghua/
 骨質疏鬆症-->骨科,https://www.120ask.com/list/guke/
 腦瘤-->颅脑肿瘤,https://www.120ask.com/list/lnzl/
-青光眼-->https://www.120ask.com/list/qingguangyan/
+青光眼-->青光眼,https://www.120ask.com/list/qingguangyan/
 白內障-->白内障,https://www.120ask.com/list/baineizhang/
 帕金森-->帕金森病,https://www.120ask.com/list/pjsb/
 氣喘-->呼吸内科,https://www.120ask.com/list/xiaochuan/

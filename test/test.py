@@ -78,6 +78,8 @@ class WebPageParserTest(unittest.TestCase):
             self.assertEqual(len(l),8)
             l2 = page.parse_questions()
             self.assertEqual(len(l2),20)
+            href = page.parse_next_link()
+            self.assertEqual(href,"http://www.120ask.com/list/waike/2/")
 
 
 class ItemTest(unittest.TestCase):

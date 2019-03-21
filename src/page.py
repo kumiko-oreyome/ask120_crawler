@@ -1,6 +1,6 @@
 import re
 from lxml import etree
-from .util import rlstrip
+from .util import rlstrip,extract_qid,https_completion
 
 
 
@@ -43,9 +43,7 @@ class KeywordQueryPage():
 
     def parse_question_ids(self):
         for link in self.parse_question_links():
-            m = re.search(r'([0-9]+)\.htm',link)
-            qid = m.group(1)
-            yield qid        
+            yield   extract_qid(link)      
 
     def parse_next_page_link(self):
         link = self.base_root.xpath("//div[@class='p_pagediv']//a[@title='下一页']/@href")
@@ -54,7 +52,9 @@ class KeywordQueryPage():
         return link[0]
 
 
- 
+
+
+
 
 class PageUnderDepartment():
     def __init__(self,keyword,page_src):
@@ -76,11 +76,19 @@ class PageUnderDepartment():
             #department_tag_name = a1.xpath("./text()")[0]
             #department_href =  a1.xpath("./@href")[0]
             q_node = question_node.xpath("./a[@class='q-quename']")[0]
-            qtitle = q_node.xpath('./text()')[0]
+            #qtitle = q_node.xpath('./text()')[0]
             q_href = q_node.xpath('./@href')[0]
-            l.append(( qtitle,q_href))
+            url = https_completion(q_href)
+            qid = extract_qid(q_href)
+            l.append(( qid,url))
             #print(( department_tag_name,department_href,qtitle,q_href))
         return l
+
+    def parse_next_link(self):
+        node = self.base_root.xpath("//a[text()='下一页']")
+        if len(node) == 0:
+            return None
+        return  https_completion(rlstrip(node[0].xpath('./@href')[0]))
 
 
 class HealthQuestionPage():
@@ -100,8 +108,7 @@ class HealthQuestionPage():
         assert len(node) > 1
         node = node[-1]
         url =  rlstrip(node.xpath('./@href')[0])
-        if not url.startswith("https:"):
-            url = "https:"+url
+        url = https_completion(url)
         name = node.xpath('.//text()')[0]
         return name,url
 
