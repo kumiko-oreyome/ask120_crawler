@@ -47,8 +47,13 @@ class AsyncHealthQuestionRequest():
         self.url = url
         self.callback = callback
     async def  send(self):
-        r = await self.asession.get(self.url)
-        return self.callback.on_page_loaded(r.content)
+        try:
+            r = await self.asession.get(self.url,timeout=10)
+        except:
+            print('fuck 2 : %s'%(self.url))
+            return self.send()
+        else:
+            return self.callback.on_page_loaded(r.content)
 
 class DepartmentOfKeywordCallback():
     def __init__(self):
