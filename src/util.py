@@ -37,7 +37,7 @@ def get_browser_driver(driver_path,env_name):
     if env_name == 'DEBUG':
         driver  = webdriver.Chrome(driver_path,chrome_options=webdriver.ChromeOptions())
     elif env_name == 'DEPLOY':
-        driver = webdriver.Firefox(driver_path)
+        driver = webdriver.Firefox(executable_path=driver_path)
     else:
         assert False
     return driver
