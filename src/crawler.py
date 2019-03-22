@@ -13,19 +13,25 @@ class KeywordQueryRequest():
         self.MAX_TIME_RETRY = 20
         self.retry_cnt = 0
     def send(self,url):
-        self.driver.implicitly_wait(15)
-        self.driver.get(url)
+        print('send')
+        print('- '*49)
+        try:
+            self.driver.get(url)
+        except:
+            print('fuck %s'%(url))
+            return  self.send(url)
         #有的時候第一時間沒有辦法渲染全部就直接parse了 然後就出錯 所以要check
-        base_root = etree.HTML(self.driver.page_source)
-        if not self.check_page_ready(base_root):
-            print('request again : %s'%(url))
-            self.retry_cnt+=1
-            if self.retry_cnt > self.MAX_TIME_RETRY:
-                print('Retry > MAX TIME .... GG')
-                return None
-            return self.send(url)
-        self.retry_cnt = 0
-        return self.driver.page_source
+        else:
+            base_root = etree.HTML(self.driver.page_source)
+            if not self.check_page_ready(base_root):
+                print('request again : %s'%(url))
+                self.retry_cnt+=1
+                if self.retry_cnt > self.MAX_TIME_RETRY:
+                    print('Retry > MAX TIME .... GG')
+                    return None
+                return self.send(url)
+            self.retry_cnt = 0
+            return self.driver.page_source
     def check_page_ready(self,base_root):
         return  len(base_root.xpath("//div[@class='result_box']//ul//li"))> 0 and len(base_root.xpath("//div[@class='result_box']//ul//li//span[@class='c_url']"))> 0
         # 有一些page只有一頁 不會出現下面的連結導航
@@ -58,10 +64,13 @@ class DepartmentListRequest():
     def __init__(self,driver):
         self.driver = driver
     def send(self,url):
-        self.driver.implicitly_wait(15)
-        self.driver.get(url)
-        #有的時候第一時間沒有辦法渲染全部就直接parse了 然後就出錯 所以要check
-        return self.driver.page_source
+        try:
+            self.driver.get(url)
+        except:
+            print('fuck %s'%(url))
+            return self.send(url)
+        else:
+            return self.driver.page_source
 
 
 class AsyncHealthPageCallback():

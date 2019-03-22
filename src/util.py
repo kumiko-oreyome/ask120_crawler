@@ -40,4 +40,5 @@ def get_browser_driver(driver_path,env_name):
         driver = webdriver.Firefox(executable_path=driver_path)
     else:
         assert False
+    driver.set_page_load_timeout(15)
     return driver
